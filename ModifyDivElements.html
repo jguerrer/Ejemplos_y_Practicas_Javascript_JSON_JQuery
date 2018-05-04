@@ -1,0 +1,53 @@
+<!--jquery-ajax.html-->
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+    <title>Modificando DIVs via JQuery</title>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script>
+	var contadorGlobal=0;
+	var textoVez='vez';
+	var textoLinea='linea';
+    //https://api.jquery.com/ready/
+	$(document).ready(
+		() => 	{
+        
+        //console.log("query", );
+		//Esta linea emplea JQuery, a traves del selector $("# "), para acceder al elemento con id "botonModificar" dentro del navegador.
+		//https://www.w3schools.com/jquery/jquery_ref_selectors.asp
+		//tras seleccionar el boton, se procede a modificar el evento click para asignar la accion de modificar el contenido
+			//https://api.jquery.com/click/
+			$('#botonModificar').click( 
+				//se define una funcion anonima que no recibe nada, es equivalente a escribir function(){...
+				()=>{
+						contadorGlobal++;
+						
+						//agregando contenido al elemento resultados
+						//http://api.jquery.com/append/
+						$('#resultados').append('<li> ' + (contadorGlobal ) + ' '+ textoLinea + '.</li>');               
+						textoLinea='líneas';//reemplazando el singular por el plural. Solo la primera vez es singular.
+						
+						//mostrando resultados en la consola de JAvascript
+						console.log("Boton presionado " + (contadorGlobal) + " " + textoVez );
+						textoVez='veces';//reemplazando el singular por el plural. Solo la primera vez es singular.
+						
+						
+						//reemplazando el contenido del elemento clicks
+						//http://api.jquery.com/text/
+						$('#clicks').text('Clicks: ' + contadorGlobal);
+					});
+				});
+            
+    
+    </script>
+</head>
+<body>
+    <h2>Modificando DIVs via JQuery</h2>
+    <input type="button" id="botonModificar" value="Agregar linea..." />
+		<div id="clicks">Clicks: 0</div>			<!-- Aqui se colocara el numero de veces que se presione el boton. -->
+		<div id="resultados"></div>     <!-- Aqui se escribira una linea nueva por cada vez que se presione el boton. -->
+    </div>
+</body>
+</html>
