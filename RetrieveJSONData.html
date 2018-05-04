@@ -1,0 +1,45 @@
+<!--jquery-ajax.html-->
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+    <title>Cargando JSON via JQuery y vaciando contenido.</title>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script>
+
+    //https://api.jquery.com/ready/
+	$(document).ready(
+		() => 	{
+        
+        //console.log("query", );
+		//Esta linea emplea JQuery, a traves del selector $("# "), para acceder al elemento con id "botonModificar" dentro del navegador.
+		//https://www.w3schools.com/jquery/jquery_ref_selectors.asp
+		//tras seleccionar el boton, se procede a modificar el evento click para asignar la accion de modificar el contenido
+			//https://api.jquery.com/click/
+			$('#botonModificar').click( 
+				//se define una funcion anonima que no recibe nada, es equivalente a escribir function(){...
+				()=>{
+						
+						var url=$(":input[id='myURL']")[0].value;//suponemos que no se repite el id
+						var mijson =$.getJSON(url,"json");	
+						$('#resultados').append( mijson.responseText );    //se realiza n dump de todos los datos como texto           
+						
+						//mostrando resultados en la consola de JAvascript
+						console.log("Boton presionado ");
+						
+					});
+				});
+            
+    
+    </script>
+</head>
+<body>
+    <h2>Ejemplo de carga sincrona de JSON y despliegue de resultados crudos.</h2>
+	<input type="input" id="myURL" value="catalogo.json" />
+    <input type="button" id="botonModificar" value="Cargar JSON" />
+		
+		<div id="resultados"></div>     <!-- Aqui se escribira el resultado de la carga de JSON. -->
+    </div>
+</body>
+</html>
