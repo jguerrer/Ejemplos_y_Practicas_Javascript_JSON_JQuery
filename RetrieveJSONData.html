@@ -21,12 +21,20 @@
 				//se define una funcion anonima que no recibe nada, es equivalente a escribir function(){...
 				()=>{
 						
-						var url=$(":input[id='myURL']")[0].value;//suponemos que no se repite el id
-						var mijson =$.getJSON(url,"json");	
-						$('#resultados').append( mijson.responseText );    //se realiza n dump de todos los datos como texto           
-						
-						//mostrando resultados en la consola de JAvascript
 						console.log("Boton presionado ");
+
+						url=$(":input[id='myURL']")[0].value;//suponemos que no se repite el id
+						
+						mijson =$.getJSON(url,"json").done(()=>{//el metodo done es importante porque indica cuando finaliza la llamada
+							jsondata=mijson.responseText;
+							console.log(jsondata);
+							console.log("Modificando Resultados");
+
+							$('#resultados').text( jsondata );    //se realiza n dump de todos los datos como texto           
+							//mostrando resultados en la consola de JAvascript
+						
+						});
+						console.log("petición enviada...");
 						
 					});
 				});
@@ -35,7 +43,11 @@
     </script>
 </head>
 <body>
-    <h2>Ejemplo de carga sincrona de JSON y despliegue de resultados crudos.</h2>
+    <h2>Ejemplo de carga asincrona de JSON y despliegue de resultados crudos.</h2>
+	<h2>Para garantizar que los datos existan al momento de realizar la modificacion,</h2>
+	<h2>	se emplea el metodo getJSON().done(callback) )</h2>
+	
+
 	<input type="input" id="myURL" value="catalogo.json" />
     <input type="button" id="botonModificar" value="Cargar JSON" />
 		
